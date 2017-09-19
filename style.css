@@ -1,0 +1,20 @@
+body {
+  background: #e2e2e2;
+}
+
+h1 {
+  font-size: 70px;
+  color: #000;
+}
+
+button {
+  border: none;
+  background: #000;
+  color: #fff;
+  font-size: 50px;
+}
+
+button.active {
+  background: #fff;
+  color: #000;
+}
