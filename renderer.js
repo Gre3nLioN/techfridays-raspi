@@ -1,28 +1,28 @@
-import { init } from 'raspi';
-import { DigitalInput, DigitalOutput, HIGH, LOW } from 'raspi-gpio';
+const raspi = require('raspi');
+const gpio = require('raspi-gpio');
 
 const light = document.querySelector('.light');
 const ac = document.querySelector('.ac');
 
-init(() => {
-  const acPin = new DigitalOutput('P1-3');
-  const lightPin = new DigitalOutput('P1-5');
+raspi.init(() => {
+  const acPin = new gpio.DigitalOutput('P1-3');
+  const lightPin = new gpio.DigitalOutput('P1-5');
   
   ac.addEventListener('click', () => {
     ac.classList.toggle('active');
-    if(acPin.value === HIGH) {
-      acPin.write(LOW);
+    if(acPin.value === gpio.HIGH) {
+      acPin.write(gpio.LOW);
     } else {
-      acPin.write(HIGH);
+      acPin.write(gpio.HIGH);
     }
   });
 
   light.addEventListener('click', () => {
     light.classList.toggle('active');
-    if(lightPin.value === HIGH) {
-      lightPin.write(LOW);
+    if(lightPin.value === gpio.HIGH) {
+      lightPin.write(gpio.LOW);
     } else {
-      lightPin.write(HIGH);
+      lightPin.write(gpio.HIGH);
     }
   });
 });
