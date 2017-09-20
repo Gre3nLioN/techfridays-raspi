@@ -1,28 +1,28 @@
 var raspi = require('raspi');
-var pwm = require('raspi-pwm');
+var gpio = require('raspi-gpio');
 
 var light = document.querySelector('.light');
 var ac = document.querySelector('.ac');
 
 raspi.init(() => {
-  var acPin = new pwm.PWM('GPIO17');
-  var lightPin = new pwm.PWM('GPIO4');
+  var acPin = new gpio.DigitalOutput('P1-3');
+  var lightPin = new gpio.DigitalOutput('P1-5');
   
   ac.addEventListener('click', () => {
     ac.classList.toggle('active');
-    if(acPin.value === 1) {
-      acPin.write(0);
+    if(acPin.value === gpio.HIGH) {
+      acPin.write(gpio.LOW);
     } else {
-      acPin.write(1);
+      acPin.write(gpio.HIGH);
     }
   });
 
   light.addEventListener('click', () => {
     light.classList.toggle('active');
-    if(lightPin.value === 1) {
-      lightPin.write(0);
+    if(lightPin.value === gpio.HIGH) {
+      lightPin.write(gpio.LOW);
     } else {
-      lightPin.write(1);
+      lightPin.write(gpio.HIGH);
     }
   });
 });
