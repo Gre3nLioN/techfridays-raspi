@@ -5,8 +5,8 @@ var light = document.querySelector('.light');
 var ac = document.querySelector('.ac');
 
 raspi.init(() => {
-  var acPin = new gpio.DigitalOutput('P1-3');
-  var lightPin = new gpio.DigitalOutput('P1-5');
+  var acPin = new gpio.DigitalOutput('GPIO17');
+  var lightPin = new gpio.DigitalOutput('GPIO4');
   
   ac.addEventListener('click', () => {
     ac.classList.toggle('active');
