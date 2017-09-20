@@ -1,5 +1,6 @@
 var raspi = require('raspi');
 var gpio = require('raspi-gpio');
+var _ = require('lodash');
 
 var light = document.querySelector('.light');
 var ac = document.querySelector('.ac');
@@ -8,21 +9,16 @@ raspi.init(() => {
   var acPin = new gpio.DigitalOutput('GPIO17');
   var lightPin = new gpio.DigitalOutput('GPIO4');
   
-  ac.addEventListener('click', () => {
-    ac.classList.toggle('active');
-    if(acPin.value === gpio.HIGH) {
-      acPin.write(gpio.LOW);
-    } else {
-      acPin.write(gpio.HIGH);
-    }
-  });
-
-  light.addEventListener('click', () => {
-    light.classList.toggle('active');
-    if(lightPin.value === gpio.HIGH) {
-      lightPin.write(gpio.LOW);
-    } else {
-      lightPin.write(gpio.HIGH);
-    }
-  });
+  ac.addEventListener('click', _.partialRight(togglePin, acPin));
+  light.addEventListener('click', _.partialRight(togglePin, lightPin));
 });
+
+function togglePin(e, pin) {
+  e.target.classList.toggle('active');
+
+  if(pin.value === gpio.HIGH) {
+    pin.write(gpio.LOW);
+  } else {
+    pin.write(gpio.HIGH);
+  }
+}
