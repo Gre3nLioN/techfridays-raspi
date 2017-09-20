@@ -1,25 +1,28 @@
-const Gpio = require('pigpio').Gpio,
+var raspi = require('raspi');
+var pwm = require('raspi-pwm');
 
-const light = document.querySelector('.light');
-const ac = document.querySelector('.ac');
+var light = document.querySelector('.light');
+var ac = document.querySelector('.ac');
 
-const acPin = new Gpio(17);
-const lightPin = new Gpio(4);
+raspi.init(() => {
+  var acPin = new pwm.PWM('GPIO17');
+  var lightPin = new pwm.PWM('GPIO4');
+  
+  ac.addEventListener('click', () => {
+    ac.classList.toggle('active');
+    if(acPin.value === 1) {
+      acPin.write(0);
+    } else {
+      acPin.write(1);
+    }
+  });
 
-ac.addEventListener('click', () => {
-  ac.classList.toggle('active');
-  if(acPin.digitalRead() === 1) {
-    acPin.digitalWrite(0);
-  } else {
-    acPin.digitalWrite(1);
-  }
-});
-
-light.addEventListener('click', () => {
-  light.classList.toggle('active');
-  if(lightPin.digitalRead() === 1) {
-    lightPin.digitalWrite(0);
-  } else {
-    lightPin.digitalWrite(1);
-  }
+  light.addEventListener('click', () => {
+    light.classList.toggle('active');
+    if(lightPin.value === 1) {
+      lightPin.write(0);
+    } else {
+      lightPin.write(1);
+    }
+  });
 });
