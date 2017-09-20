@@ -14,12 +14,11 @@ raspi.init(() => {
 });
 
 function togglePin(e, pin) {
-
   if(pin.value === gpio.HIGH) {
-    pin.write(gpio.LOW);
     e.target.classList.remove('active');
+    pin.write(gpio.LOW);
   } else {
-    pin.write(gpio.HIGH);
     e.target.classList.add('active');
+    pin.write(gpio.HIGH);
   }
 }
