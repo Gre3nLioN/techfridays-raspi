@@ -6,7 +6,9 @@
   "scripts": {
     "start": "electron .",
     "rebuild": "electron-rebuild -f -w pigpio",
-    "build": "electron-packager . smart-home"
+    "build": "electron-packager . smart-home",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -26,6 +28,8 @@
     "lodash": "^4.17.4",
     "raspi": "^5.0.1",
     "raspi-gpio": "^5.0.0",
-    "raspi-pwm": "^5.0.0"
-  }
+    "raspi-pwm": "^5.0.0",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
